@@ -13,8 +13,7 @@ from models.users.estudiante import estudiantes
 from models.ingreso import ingreso
 from models.institucion.clases import clases
 from models.users.users import users
-from models.horario import horarios
-from models.institucion.aulas import aulas
+from models.horarios import horarios
 
 Session = sessionmaker(bind=engine)
 
@@ -41,19 +40,22 @@ class IngresoRepository:
                     raise HTTPException(status_code=404, detail="Usuario no encontrado como estudiante ni docente")
 
                 # Buscar si tiene clase activa en ese aula
-                ahora = datetime.now()
-                dia_semana = ahora.strftime('%A')  # o el formato que uses en tu DB
-                hora_actual = ahora.time()
-
+                
                 clase_info = session.execute(
                     select(horarios.c.id_clase)
-                    .where(
-                        horarios.c.id_aula     == id_aula,
-                        horarios.c.dia         == dia_semana,
+                      .select_from(
+                        horarios.join(
+                          clases,
+                          horarios.c.id_clase == clases.c.id
+                        )
+                      )
+                      .where(and_(
+                        clases.c.id_aula      == id_aula,
+                        horarios.c.dia        == dia_semana,
                         horarios.c.hora_inicio <= hora_actual,
                         horarios.c.hora_fin    >= hora_actual,
-                    )
-                ).first()
+                      ))
+                ).scalar_one_or_none()
 
 
                 if not clase_info:
