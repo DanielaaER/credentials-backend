@@ -16,9 +16,11 @@ def generar_qr(req: QRGenerarRequest):
 def validar_qr(id_institucion: int, req: QRValidarRequest):
     print(f"Validando QR para aula: {id_institucion}")
     datos = validar_qr_token(req.token)
+    print(f"Datos decodificados: {datos}")
     datos = datos.get("data")
     if not datos:
         return {"error": "Token inválido o expirado"}
+    print(f"Datos decodificados: {datos}")
     id_usuario = datos.get("id")
     print(f"Validando QR para usuario: {id_usuario} en aula: {id_institucion}")
     return repo.registrar_ingreso_qr(id_usuario=id_usuario, id_aula=id_institucion)
