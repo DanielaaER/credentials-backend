@@ -19,7 +19,7 @@ def validar_qr(req: QRValidarRequest, id_institucion: int):
     if not datos:
         return {"error": "Token inválido o expirado"}
     id_usuario = datos.get("id")
-    tipo_usuario = datos.get("tipo")
+    print(f"Validando QR para usuario: {id_usuario} en aula: {id_institucion}")
     return repo.registrar_ingreso_qr(id_usuario=id_usuario, id_aula=id_institucion)
 
 @qrRouter.get("/asistencia/clase/{id_clase}")
