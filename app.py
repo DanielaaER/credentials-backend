@@ -14,7 +14,7 @@ from config.functions_jwt import validate_token
 from config.db import engine, meta_data
 
 meta_data.create_all(bind=engine)
-EXCLUDED_PATHS = ["/api/login", "/docs", "/openapi.json", "/api/validar/qr/${insitucion_id}"]
+EXCLUDED_PATHS = ["/api/login", "/docs", "/openapi.json", "/api/validar/qr"]
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 app = FastAPI(title="REST API To Virtual Credentials", version="0.1")
