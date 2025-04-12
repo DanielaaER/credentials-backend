@@ -44,6 +44,9 @@ class IngresoRepository:
                 dia_semana = ahora.strftime('%A')    # Ajusta al formato que guardes
                 hora_actual = ahora.time()
                 
+                print(f"Hora actual: {hora_actual}")
+                print(f"Dia de la semana: {dia_semana}")
+
                 clase_info = session.execute(
                     select(horarios.c.id_clase)
                       .select_from(
