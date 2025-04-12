@@ -13,7 +13,10 @@ from models.users.estudiante import estudiantes
 from models.ingreso import ingreso
 from models.institucion.clases import clases
 from models.users.users import users
-from models.horario import horarios
+from models.horario import 
+import locale
+locale.setlocale(locale.LC_TIME, 'es_MX.UTF-8')  
+
 
 Session = sessionmaker(bind=engine)
 
