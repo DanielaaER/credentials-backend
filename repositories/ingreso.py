@@ -13,7 +13,7 @@ from models.users.estudiante import estudiantes
 from models.ingreso import ingreso
 from models.institucion.clases import clases
 from models.users.users import users
-from models.institucion.horarios import horarios
+from models.horario import horarios
 from models.institucion.aulas import aulas
 
 Session = sessionmaker(bind=engine)
