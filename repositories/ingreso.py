@@ -86,6 +86,7 @@ class IngresoRepository:
                 ).order_by(desc(ingreso.c.hora_ingreso))
 
                 ultimo = session.execute(query).first()
+                print(f"Ultimo ingreso: {ultimo}")
                 tipo_ingreso = True if not ultimo or not ultimo.tipo_ingreso else False
                 
                 session.execute(
