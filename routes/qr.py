@@ -15,26 +15,23 @@ def generar_qr(req: QRGenerarRequest):
 @qrRouter.post("/validar/{id_institucion}")
 def validar_qr(id_institucion: int, req: QRValidarRequest):
     print(f"Validando QR para aula: {id_institucion}")
-    resultado = validar_qr_token(req.token)
-    print(f"Datos decodificados: {resultado}")
 
-    payload = resultado
-
-    if not payload.get("valido", False):
+    datos = validar_qr_token(req.token)
+    if not datos.get("valido", False):
         raise HTTPException(
             status_code=400,
-            detail=payload.get("error", "Token inválido o expirado")
+            detail=datos.get("error", "Token inválido o expirado")
         )
 
-    id_usuario = payload.get("id")
-    if id_usuario is None:
-        raise HTTPException(status_code=500, detail="Respuesta inválida del validador")
-
+   print(f"Datos decodificados: {datos}")
+    datos = datos.get("data")
+    if not datos.get("valido") is False:
+        return {"error": "Token inválido o expirado"}
+    print(f"Datos decodificados: {datos}")
+    id_usuario = datos.get("id")
     print(f"Validando QR para usuario: {id_usuario} en aula: {id_institucion}")
-    return repo.registrar_ingreso_qr(
-        id_usuario=id_usuario,
-        id_aula=id_institucion
-    )
+    return repo.registrar_ingreso_qr(id_usuario=id_usuario, id_aula=id_institucion)
+
 @qrRouter.get("/asistencia/clase/{id_clase}")
 def obtener_asistencia(id_clase: int, fecha: datetime.date):
     return repo.obtener_lista_asistencia(id_clase=id_clase, fecha=fecha)
