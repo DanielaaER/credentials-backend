@@ -39,10 +39,19 @@ class IngresoRepository:
                     raise HTTPException(status_code=404, detail="Usuario no encontrado como estudiante ni docente")
 
                 # Buscar si tiene clase activa en ese aula
+                ahora = datetime.now()
+                dia_semana = ahora.strftime('%A')  # o el formato que uses en tu DB
+                hora_actual = ahora.time()
+
                 clase_info = session.execute(
-                    select(clases.c.id).where(clases.c.id_aula == id_aula)
+                    select(horarios.c.id_clase)
+                    .where(
+                        horarios.c.id_aula     == id_aula,
+                        horarios.c.dia         == dia_semana,
+                        horarios.c.hora_inicio <= hora_actual,
+                        horarios.c.hora_fin    >= hora_actual,
+                    )
                 ).first()
-                print(f"Clase info: {clase_info}")
 
 
                 if not clase_info:
