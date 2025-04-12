@@ -11,7 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from fastapi import Response, HTTPException
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_201_CREATED
 from schemas.users.estudiante import EstudianteBase, EstudianteUpdate
-from schemas.users.docente import DocenteBase
+from schemas.users.docente import DocenteBase, DocenteUpdate
 from schemas.users.administrador import AdministradorBase, AdministradorUpdate
 Session = sessionmaker(bind=engine)
 
