@@ -8,6 +8,7 @@ from repositories.institucion.componente_educativo import ComponenteEducativo
 from schemas.institucion.edificio import EdificioBase, EdificioUpdate
 from models.institucion.edificios import edificios
 from models.institucion.aulas import aulas
+from models.institucion.institucion import institucion
 
 Session = sessionmaker(bind=engine)
 

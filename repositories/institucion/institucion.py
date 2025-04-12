@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
 from config.db import engine
 from schemas.institucion.institucion import InstitucionBase, InstitucionUpdate
-from models.institucion import institucion
+from models.institucion.institucion import institucion
 from models.institucion.biblioteca import biblioteca
 from models.institucion.edificios import edificios
 from repositories.institucion.componente_educativo import ComponenteEducativo
