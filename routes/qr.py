@@ -12,7 +12,7 @@ def generar_qr(req: QRGenerarRequest):
     token = generar_qr_token({"tipo": req.tipo, "id": req.id})
     return {"token": token}
 
-@qrRouter.post("/validar")
+@qrRouter.post("/validar/{id_institucion}")
 def validar_qr(req: QRValidarRequest, id_institucion: int):
     datos = validar_qr_token(req.token)
     datos = datos.get("data")
