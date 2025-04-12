@@ -71,7 +71,7 @@ class IngresoRepository:
                 if not clase_info:
                     raise HTTPException(status_code=404, detail="No hay clase en este aula")
 
-                id_clase = clase_info.id
+                id_clase = clase_info
                 print(f"Clase ID: {id_clase}")
                 hoy = datetime.now().date()
 
