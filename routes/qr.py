@@ -8,10 +8,10 @@ from fastapi import HTTPException
 qrRouter = APIRouter(prefix="/qr", tags=["QR"])
 repo = IngresoRepository()
 
-@qrRouter.post("/generar", response_model=QRRespuesta)
+@qrRouter.post("/generar")
 def generar_qr(req: QRGenerarRequest):
     token = generar_qr_token({"tipo": req.tipo, "id": req.id})
-    return {"token": token}
+    return token
 
 @qrRouter.post("/validar/{id_institucion}")
 def validar_qr(id_institucion: int, req: QRValidarRequest):
