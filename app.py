@@ -52,7 +52,7 @@ class JWTAuthMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             return JSONResponse(status_code=500, content={"detail": str(e)})
 
-#app.add_middleware(JWTAuthMiddleware)
+app.add_middleware(JWTAuthMiddleware)
 
 app.include_router(loginRouter, tags=["Login"], prefix="/api")
 app.include_router(userRouter, tags=["Usuarios"], prefix="/api")
