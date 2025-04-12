@@ -44,9 +44,9 @@ class IngresoRepository:
 
                 # Buscar si tiene clase activa en ese aula
                 ahora = datetime.now()
-                dia_semana = ahora.strftime('%A')    # Ajusta al formato que guardes
+                dia_semana = ahora.strftime('%A').capitalize()
                 hora_actual = ahora.time()
-                
+
                 print(f"Hora actual: {hora_actual}")
                 print(f"Dia de la semana: {dia_semana}")
 
