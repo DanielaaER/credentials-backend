@@ -59,6 +59,7 @@ class IngresoRepository:
                         horarios.c.hora_fin >= hora_actual,
                       ))
                 ).scalar_one_or_none()
+                print(f"Clase info: {clase_info}")
 
 
                 if not clase_info:
