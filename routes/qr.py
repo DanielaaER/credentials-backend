@@ -18,7 +18,7 @@ def validar_qr(id_institucion: int, req: QRValidarRequest):
     datos = validar_qr_token(req.token)
     print(f"Datos decodificados: {datos}")
     datos = datos.get("data")
-    if not datos:
+    if not datos["valido"] is False:
         return {"error": "Token inválido o expirado"}
     print(f"Datos decodificados: {datos}")
     id_usuario = datos.get("id")
