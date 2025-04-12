@@ -3,6 +3,7 @@ from schemas.qr_schema import QRGenerarRequest, QRRespuesta, QRValidarRequest
 from utils.qr import generar_qr_token, validar_qr_token
 from repositories.ingreso import IngresoRepository
 import datetime
+from fastapi import HTTPException
 
 qrRouter = APIRouter(prefix="/qr", tags=["QR"])
 repo = IngresoRepository()
@@ -23,7 +24,7 @@ def validar_qr(id_institucion: int, req: QRValidarRequest):
             detail=datos.get("error", "Token inválido o expirado")
         )
 
-   print(f"Datos decodificados: {datos}")
+    print(f"Datos decodificados: {datos}")
     datos = datos.get("data")
     if not datos.get("valido") is False:
         return {"error": "Token inválido o expirado"}
